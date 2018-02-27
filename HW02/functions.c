@@ -23,10 +23,11 @@ unsigned int modprod(unsigned int a, unsigned int b, unsigned int p) {
 		if (binaryNum[j]==1)
 		{
 
-			ab = (ab+za*binaryNum[j])%p;
+			ab = (ab+za*binaryNum[j])%p;}
+
 			za = 2*za%p;
 
-		}	
+			
 	}
 	return ab;
 }
@@ -70,7 +71,7 @@ unsigned int randXbitInt(unsigned int n) {
 //tests for primality and return 1 if N is probably prime and 0 if N is composite
 unsigned int isProbablyPrime(unsigned int N) {
 
-  if (N%2==2) return 0; //not interested in even numbers (including 2)
+  if (N%2==0) return 0; //not interested in even numbers (including 2)
 
   unsigned int NsmallPrimes = 168;
   unsigned int smallPrimeList[168] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 
@@ -111,11 +112,11 @@ unsigned int isProbablyPrime(unsigned int N) {
       r = r+1;
   }
   d = t;
-  printf("%d\n",d);
-  printf("%d\n",r);
+//  printf("%d\n",d);
+//  printf("%d\n",r);
   for (unsigned int n=0;n<NsmallPrimes;n++) {
     unsigned int x = modExp(smallPrimeList[n],d,N);
-    printf("%s\n","dao");
+
     if (x == 1||x==N-1)
     {
         continue;
@@ -141,11 +142,11 @@ unsigned int isProbablyPrime(unsigned int N) {
 unsigned int findGenerator(unsigned int p) {
   /* Q3.3: complete this function and use the fact that p=2*q+1 to quickly find a generator */
 	unsigned int q = (p-1)/2;
-	printf("%d\n",q);	
+//	printf("%d\n",q);	
 	for (unsigned int i = 2; i <p; i++)
 	{
 
-		if (modprod(i,i,p) !=1 && modExp(i,q,p) !=1)
+		if ((modprod(i,i,p) !=1) &&( modExp(i,q,p) !=1))
 		{
 			return i;
 		}
