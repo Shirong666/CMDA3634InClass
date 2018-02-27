@@ -58,7 +58,6 @@ int main (int argc, char **argv) {
 	}	
 
 
-printf("p = %u \n", p);
 
 	printf("p = %u is probably prime and equals 2*q + 1. q= %u and is also probably prime.\n", p, q);  
 
@@ -73,15 +72,17 @@ printf("p = %u \n", p);
 	for (unsigned int k = 0; k<p-2;k++)
 	{
 		x=x+ rand()%2;
-	}	
+	}
+	printf("x = %u is a random num in the range of 1 to p(%u)-1 \n", x,p);	
 	unsigned int h;
 	h = modExp(g,x,p);
-	printf("the h = %u \n", h);
+	printf("using h=g to x, we get a h = %u \n", h);
 	for (unsigned int d=1; d<p;d++)
 	{
 		if(modExp(g,d,p)==h)
 		{
-			printf("the x = %u is \n", d);
+			printf("knowing g and h and using for loop, we get the x = %u \n", d);
+			break;
 		}
 	}
 

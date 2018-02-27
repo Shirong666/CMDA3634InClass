@@ -97,7 +97,7 @@ unsigned int isProbablyPrime(unsigned int N) {
                                 991, 997};
 
   //before using a probablistic primality check, check directly using the small primes list
-  for (unsigned int n=1;n<NsmallPrimes;n++) {
+  for (unsigned int n=0;n<NsmallPrimes;n++) {
     if (N==smallPrimeList[n])   return 1; //true
     if (N%smallPrimeList[n]==0) return 0; //false
   }
