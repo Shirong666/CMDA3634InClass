@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
   
   int rank = omp_get_thread_num();
   
-  srand48_r(seed, drandData+rank);
+  srand48_r(rank, drandData+rank);
 }
   long long int Ntrials = 10000000;
 
