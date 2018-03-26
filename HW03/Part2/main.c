@@ -71,18 +71,23 @@ if (rank ==0)
  t1 =MPI_Wtime();
 }
 
-//unsigned int breakCond =0;
+ int breakCond =0;
  
  //loop through the values from 'start' to 'end'
-  for (unsigned int i=start;(i<end);i++) {
+  for (unsigned int i=start;(i<end)&&(breakCond==0);i++) {
 //Bonus:
 	
     if (modExp(g,i,p)==h){
       //breakCond=1;	
       printf("Secret key found! x = %u \n", i);
-      //MPI_Bcast()
+      breakCond =1;
+      MPI_Bcast(&breakCond,1,MPI_INT,rank,MPI_COMM_WORLD);
       }
-
+	//Bonus:
+    //if(i%10000==0)
+    //{
+//	MPI_Bcast(&breakCond,1,MPI_INT,rank,MPI_COMM_WORLD);
+    //}
   }
 MPI_Barrier(MPI_COMM_WORLD);
 if (rank ==0){
