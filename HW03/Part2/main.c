@@ -73,7 +73,7 @@ if (rank ==0)
 
 unsigned int breakCond, breaksum;
 unsigned int Ninterval; 
-Ninterval =1000;
+Ninterval =800;
  //loop through the values from 'start' to 'end'
   for (unsigned int i=start;(i<end);i++) {
 //Bonus:
@@ -85,7 +85,7 @@ Ninterval =1000;
 //      MPI_Bcast(&breakCond,1,MPI_INT,rank,MPI_COMM_WORLD);
       }
 	//Bonus:
-    if(i%Ninterval==0)
+    if((i-start)%Ninterval==0)
     {
 	MPI_Allreduce(&breakCond,&breaksum,1,MPI_UNSIGNED,MPI_SUM,MPI_COMM_WORLD);
     }
