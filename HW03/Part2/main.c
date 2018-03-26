@@ -72,9 +72,10 @@ if (rank ==0)
 }
 
 unsigned int breakCond, breaksum;
- 
+unsigned int Ninterval; 
+Ninterval =1000;
  //loop through the values from 'start' to 'end'
-  for (unsigned int i=start;(i<end)&&(breaksum==0);i++) {
+  for (unsigned int i=start;(i<end);i++) {
 //Bonus:
 	
     if (modExp(g,i,p)==h){
@@ -84,9 +85,13 @@ unsigned int breakCond, breaksum;
 //      MPI_Bcast(&breakCond,1,MPI_INT,rank,MPI_COMM_WORLD);
       }
 	//Bonus:
-    if(i%10000==0)
+    if(i%Ninterval==0)
     {
 	MPI_Allreduce(&breakCond,&breaksum,1,MPI_UNSIGNED,MPI_SUM,MPI_COMM_WORLD);
+    }
+    if (breaksum>0)
+    {
+         break;
     }
   }
 MPI_Barrier(MPI_COMM_WORLD);
