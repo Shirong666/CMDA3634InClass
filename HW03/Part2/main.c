@@ -73,8 +73,9 @@ if (rank ==0)
 
 unsigned int breakCond, breaksum;
 unsigned int Ninterval; 
-Ninterval =800;
- //loop through the values from 'start' to 'end'
+Ninterval =2000;
+printf("the Ninterval is %d \n",Ninterval); 
+//loop through the values from 'start' to 'end'
   for (unsigned int i=start;(i<end);i++) {
 //Bonus:
 	
