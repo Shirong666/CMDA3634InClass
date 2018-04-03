@@ -128,7 +128,7 @@ dim3 G(Gx, Gx, 1);
 
   // compute mandelbrot set
   mandelbrot<<<G,B>>>(Nre, Nim, cmin, cmax, count); 
-  cudaMemcpy(count1,count,Nre*Nim*sizeof(float),cudaMemcpyDeviceToHost);
+  cudaMemcpy(count,count1,Nre*Nim*sizeof(float),cudaMemcpyDeviceToHost);
   clock_t end = clock(); //start time in CPU cycles
   
   // print elapsed time
