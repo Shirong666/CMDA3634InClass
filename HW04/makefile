@@ -1,12 +1,27 @@
+#can change these if files are located elsewhere
+SOURCEDIR = ./.
+INCLUDEDIR = ./.
+OBJDIR = ./.
 
-mandelbrot : mandelbrot.o png_util.o 
-	gcc -O3 -fopenmp -o mandelbrot mandelbrot.o png_util.o -lpng -lm
 
-mandelbrot.o : mandelbrot.c png_util.h
-	gcc -O3 -I. -fopenmp -c mandelbrot.c
+SOURCE = $(wildcard $(SOURCEDIR)/*c)
+INCLUDES = $(wildcard $(INCLUDEDIR)/*h)
+OBJECTS = $(subst $(SOURCEDIR)/,$(OBJDIR)/,$(SOURCE:.c=.o))
 
-png_util.o : png_util.c png_util.h
-	gcc -O3 -I. -c png_util.c
+DEPS = $(INCLUDES) 
+FLAGS = -I$(INCLUDEDIR) -O3 -g -fopenmp
+LIBS  = -lm
 
-clean :
-	rm mandelbrot.o png_util.o mandelbrot
+CC =  gcc
+
+$(OBJDIR)/%.o:$(SOURCEDIR)/%.c $(DEPS)
+	$(CC) $(FLAGS) -o $@ $(LIBS) -c $<
+
+all: main
+
+main: $(OBJECTS) $(DEPS)
+	$(CC)  $(OBJECTS) $(FLAGS) -o main $(LIBS)
+
+clean:
+	rm -f main
+	rm -f $(OBJDIR)/*.o
