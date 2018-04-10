@@ -207,15 +207,14 @@ if(strlen(string)%charsPerInt != 0)
 
 void convertStringToZ(unsigned char *string, unsigned int Nchars,
                       unsigned int  *Z,      unsigned int Nints) {
-charPerInt = Nchars/Nints;
-unsigned int *tem;
+unsigned int charPerInt = Nchars/Nints;
 	
 if (charPerInt == 1)
 {
 	#pragma omp parallel for
 	for (int i = 0; i < strlen(string); i++)
 	{
-		Z[i] = (int)string[i];
+		Z[i] = (unsigned int)string[i];
 	}
 }
 if (charPerInt == 2)
@@ -224,7 +223,7 @@ if (charPerInt == 2)
 	for (int i = 0; i <strlen(string);i = i+2 )
 	{
 		unsigned int j = i/2;
-		Z[j] = (int)string[i] * 1000 + (int)string[i+1];
+		Z[j] = (unsigned int)string[i] * 256 + (unsigned int)string[i+1];
 	}	
 }
 if (charPerInt == 3)
@@ -233,7 +232,7 @@ if (charPerInt == 3)
 	for(int i = 0; i <strlen(string); i = i+3)
 	{
 		unsigned int j = i /3;
-		Z[j] = (int)string[i]*1000000 +(int)string[i+1]*1000+(int)string[i+2];
+		Z[j] = (unsigned int)string[i]*65536 +(unsigned int)string[i+1]*256+(unsigned int)string[i+2];
 	}	
 }
 
@@ -249,14 +248,14 @@ void convertZToString(unsigned int  *Z,      unsigned int Nints,
 
   /* Q1.4 Complete this function   */
   /* Q2.2 Parallelize this function with OpenMP   */
-charPerInt = Nchars/Nints;
+unsigned int charPerInt = Nchars/Nints;
 
 if(charPerInt == 1)
 {
 	#pragma omp parallel for
 	for (int i =  0; i <Nints; i++)
 	{
-		string[i] = ((char)Z[i]);
+		string[i] = ((unsigned char)Z[i]);
 	}
 }
 if(charPerInt == 2)
@@ -264,9 +263,9 @@ if(charPerInt == 2)
 	#pragma omp parallel for
 	for (int i = 0 ; i<Nints; i++)
 	{
-		j = j*2;
-		string[j] = (char)(Z[i]/1000);
-		string[j+1] = (char)(Z[i]%1000);
+		unsigned int j = i*2;
+		string[j] = (unsigned char)(Z[i]/256);
+		string[j+1] = (unsigned char)(Z[i]%256);
 	}
 
 }
@@ -275,10 +274,10 @@ if(charPerInt == 3)
 	#pragma omp parallel for
 	for (int i = 0; i < Nints; i++)
 	{
-		j = j*3;
-		string[j] = (char)(Z[i]/1000000);
-		string[j+1] = (char)((Z[i]/1000)%1000);
-		string[j+2] = (char)(Z[i]%1000);
+		unsigned int j = i*3;
+		string[j] = (unsigned char)(Z[i]/65536);
+		string[j+1] = (unsigned char)((Z[i]/256)%256);
+		string[j+2] = (unsigned char)(Z[i]%256);
 
 	}	
 
