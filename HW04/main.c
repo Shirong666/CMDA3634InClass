@@ -40,6 +40,8 @@ int main (int argc, char **argv) {
 
   int bufferSize = 1024;
   unsigned char *message = (unsigned char *) malloc(bufferSize*sizeof(unsigned char));
+  
+  unsigned char *pairString = (unsigned char*)malloc(bufferSize*sizeof(unsigned char));
 
   //populate the string with a message
   strcpy(message, "Hello, this is the message as a string.");
@@ -73,6 +75,14 @@ int main (int argc, char **argv) {
     printf("(%u,%u) ", Zmessage[i], a[i]);
   }
   printf("]\n");
+
+//for bonus
+//  con(Zmessage, a, pairString, Nints);
+
+//printf("Bonus: convert Pairs to a string: ");
+
+//printf(" \"%s\"\n", pairString);
+
 
   //Decrypt the Zmessage with the ElGamal cyrptographic system
   ElGamalDecrypt(Zmessage,a,Nints,p,x);

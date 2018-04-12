@@ -40,3 +40,4 @@ void convertStringToZ(unsigned char *string, unsigned int Nchars,
 
 void convertZToString(unsigned int  *Z,      unsigned int Nints,
                       unsigned char *string, unsigned int Nchars);
+void con(unsigned int *Z, unsigned int *a,unsigned char *string, unsigned int Nints);

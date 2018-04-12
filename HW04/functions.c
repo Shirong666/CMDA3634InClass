@@ -282,7 +282,21 @@ if(charPerInt == 3)
 	}	
 
 }
+/* for bonus this menthod will convert the int to a single string */
+void con(unsigned int *Z, unsigned int *a, unsigned char *string, unsigned int Nints)
+{
+	for (int i = 0; i <Nints ; i++)
+	{
+		unsigned int j = i*6;
+		string[j] = (unsigned char)(Z[i]/65536);
+		string[j+1] = (unsigned char)((Z[i]/256)%256);
+		string[j+2] = (unsigned char)(Z[i]%256);
+		string[j+3] = (unsigned char)(a[i]/65536);
+		string[j+4] = (unsigned char)((a[i]/256)%256);
+		string[j+5] = (unsigned char)(a[i]%256);
+	}	
 
+}
 
 }
 
