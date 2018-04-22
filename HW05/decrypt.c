@@ -79,6 +79,6 @@ fclose(mes);
  ElGamalDecrypt(Zmessage,a,Nints,p,x);
 
  convertZToString(Zmessage, Nints, message, Nints*(n-1)/8);
-
+ printf("%s\n",message);
   return 0;
 }

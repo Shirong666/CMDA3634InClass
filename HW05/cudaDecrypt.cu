@@ -46,7 +46,7 @@ int Nblock = blockDim.x;
 int id = threadid+blockid*Nblock;
 if (id < *p-1)
 {
-if (modExp(*g, id+1,*p) == *h)
+if (kermodExp(*g, id+1,*p) == *h)
 {
     *x = id +1;
     printf("Secret key found! x = %u \n", id +1);
@@ -119,7 +119,7 @@ int Nthreads = 1024;
 int Nblocks = (p-1+Nthreads-1)/Nthreads;
 
  // find the secret key
-if (x==0 || modExp(g,x<Plug>PeepOpen)!=h) {
+if (x==0 || modExp(g, x, p)!=h) {
       printf("Finding the secret key...\n");
       double startTime = clock();
 
@@ -163,6 +163,6 @@ if (x==0 || modExp(g,x<Plug>PeepOpen)!=h) {
 
 
   /* Q4 Make the search for the secret key parallel on the GPU using CUDA. */
-
+printf("%s\n",message);
   return 0;
 }
